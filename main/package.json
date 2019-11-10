@@ -1,0 +1,21 @@
+{
+  "name": "a04",
+  "version": "1.0.0",
+  "main": "data.js",
+  "scripts": {
+    "test": "node -r esm /generate_schdule_data.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "browser-sync": "^2.26.7",
+    "bulma": "^0.8.0",
+    "esm": "^3.2.25",
+    "firebase": "^7.2.3",
+    "firebaseui": "^4.2.0",
+    "jquery": "^3.4.1",
+    "pdf-parse": "^1.1.1"
+  },
+  "devDependencies": {},
+  "description": ""
+}
