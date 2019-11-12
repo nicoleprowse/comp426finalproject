@@ -53,17 +53,22 @@ export const renderCurrentUserMessages = function(user){
                             root.appendChild(a);
                             var button = document.createElement("BUTTON");
                             button.innerHTML = "Download";
+                            button.id = docsArray[j];
+                            root.appendChild(button);
+                            //TODO Fix downloads
                             button.onclick = function(){
-                                storage.child(doc.id+'/'+a.innerHTML).getDownloadURL().then(function(url) {
+                                storage.child(doc.id+'/'+button.id).getDownloadURL().then(function(url) {
+                                    window.open(url, '_blank');
                                    console.log(url);
                                   }).catch(function(error) {
                                     console.log(error);
                                   });
                             };
-                            root.appendChild(button);
+                            console.log(root);
                         }
                     }catch(e){
                         console.log("No Documents For "+doc.id);
+                        console.log(e)
                     }
                 });
             }  
