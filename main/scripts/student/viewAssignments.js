@@ -3,9 +3,11 @@ const firebaseConfig = {
     authDomain: "comp426-final.firebaseapp.com",
     databaseURL: "https://comp426-final.firebaseio.com",
     projectId: "comp426-final",
+    storageBucket:'gs://comp426-final.appspot.com'
   };
   firebase.initializeApp(firebaseConfig);
   var db = firebase.firestore();
+  var storage = firebase.storage().ref();
 
 
 
@@ -46,7 +48,21 @@ export const renderCurrentUserAssignments = function(user){
                         var a = document.createElement("A");
                         a.className = "panel-block is-active";
                         a.innerHTML = doc.data().ASSIGNMENT_NAME;
+                        a.id = courses[i];
                         root.appendChild(a);
+                        var button = document.createElement("BUTTON");
+                        button.innerHTML = "Download";
+                        button.id = doc.data().DOCUMENT;
+                        root.appendChild(button);
+                        //TODO Fix downloads
+                        button.onclick = function(){
+                            storage.child('Assignments_'+doc.data().COURSE_ID+'/'+button.id).getDownloadURL().then(function(url) {
+                            window.open(url, '_blank');
+                            console.log(url);
+                              }).catch(function(error) {
+                                console.log(error);
+                              });
+                        };
                     });
                 });
             }  
