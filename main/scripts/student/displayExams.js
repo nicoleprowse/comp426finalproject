@@ -33,9 +33,18 @@ export const renderCurrentUserCourses = function(user){
             for(var i = 0;i<courses.length;i++){
                 db.collection("assessments").where("COURSE","==",courses[i]).get().then(function(querySnapshot) {
                     querySnapshot.forEach(function(doc) {
-                        str = '<a class="panel-block is-active"><span class="panel-icon"><i class="fas fa-book" aria-hidden="true"></i></span>';
+                        str = '<a class="panel-block is-active" id = "'+doc.data().NAME+'"><span class="panel-icon"><i class="fas fa-book" aria-hidden="true"></i></span>';
                         str+=doc.data().NAME+'</a>';
                         $('#root').append(str);
+                        var a = document.getElementById(doc.data().NAME);
+                        var button = document.createElement("BUTTON");
+                        button.innerHTML = "Take Exam";
+                        button.setAttribute("value", doc.id);
+                        button.onclick = (e) => {
+                          console.log(e.target.value);
+                          location.href = "takeAssesment.html";
+                        };
+                        a.appendChild(button);
                         db.collection("questions").where("ASSESSMENT","==",doc.id).get().then(function(querySnapshot) {
                             querySnapshot.forEach(function(inner_doc) {
                                 str = '<a class="panel-block is-active"><span class="panel-icon"><i class="fas fa-book" aria-hidden="true"></i></span>';
