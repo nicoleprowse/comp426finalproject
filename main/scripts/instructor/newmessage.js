@@ -81,7 +81,6 @@ const register_user_listener = function(){
 export const loadIntoDOM = function() {
     // Grab a jQuery reference to the root HTML element
     const $root = $('#root');
-    $(".0").on("click",handleMessageSubmit);
     register_user_listener();
     
   //  $root.append("<h1>Dynamic Content Here</h1>");

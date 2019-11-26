@@ -9,57 +9,90 @@ firebase.initializeApp(firebaseConfig);
 var db = firebase.firestore();
 
 
-export const renderMessageField = function(event) {
-  var str = '';
-  str+='<form class = "form" id = "form1" onsubmit = "save.disabled = true">';
-  str+='Email: <input type="text" id = "email" value =""></br>';
-  str+='Password: <input type="text" id = "password" value =""></br>';
-  str+='Course: <select name="course" id = "course"><option value="A">A</option><option value="B">B</option><option value="C">C</option><option value="D">D</option></select>';
-  str+='</br><button class = "submit"  id = "0" type="submit"> Submit </button> </br>';
-  str+='</form>';
-  return str;
-};
-
-
-export const handleMessageSubmit = function(event){
-  event.preventDefault();
-  var tail = Math.floor(Math.random()*1000000000000000);
-  db.collection("messages").doc("Message"+tail).set({
-    COURSE_ID: $("#course").val(),
-    TEXT: $("#message").val(),
-    TYPE: $("#type").val()
-})
-.then(function() {
-    console.log("Document successfully written!");
-})
-.catch(function(error) {
-    console.error("Error writing document: ", error);
-});
-};
+const render_question_input = function(index){
+  var root = document.getElementById("question-root");
+  var container = document.createElement("DIV");
+  container.id = "container"+index;
+  var question = document.createElement("TEXTAREA");
+  question.innerHTML = "Enter Question "+ index + " here"
+  question.id = "q"+index;
+  container.appendChild(question);
+  container.appendChild(document.createElement("BR"));
+  var type = document.createElement("SELECT");
+  type.id = "t"+index;
+  type.append(new Option("Short Answer", "sa"));
+  type.append(new Option("Multiple Choice", "mc"));
+  type.append(new Option("True/False", "tf"));
+  type.onchange = function(e){
+    if(e.target.value == 'mc'){
+      var div = document.createElement("DIV");
+      div.id = "answers"+index;
+      var a = document.createElement("TEXTAREA")
+      a.innerHTML = "Enter Answer Choice A Here";
+      a.id = "a"+index;
+      div.appendChild(a);
+      div.appendChild(document.createElement("BR"));
+      var b = document.createElement("TEXTAREA")
+      b.innerHTML = "Enter Answer Choice B Here";
+      b.id = "b"+index;
+      div.appendChild(b);
+      div.appendChild(document.createElement("BR"));
+      var c = document.createElement("TEXTAREA")
+      c.innerHTML = "Enter Answer Choice C Here";
+      c.id = "c"+index;
+      div.appendChild(c);
+      div.appendChild(document.createElement("BR"));
+      var d = document.createElement("TEXTAREA")
+      d.innerHTML = "Enter Answer Choice D Here";
+      d.id = "d"+index;
+      div.appendChild(d);
+      container.appendChild(div);
+    }else{
+      var div = document.getElementById("answers"+index);
+      container.removeChild(div);
+    }
+  };
+  container.appendChild(type);
+  root.appendChild(container);
+}
 
 
 const register_user_listener = function(){
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-        var str = '';
-        str+='<form class = "form" id = "form1" onsubmit = "save.disabled" = true>';
-        str+='Message: <input type="text" id = "message" value =""></br>';
-        str+='Day and Time: <input type="datetime-local" id = "time"></br>';
-        var k = db.collection("instructors").doc(user.uid).get().then((inner_doc) => {
-            var str = 'Course: <select name="course" id = "course">';
-              for(var i = 0; i<inner_doc.data().COURSES.length; i++){
-                str+='<option value="'+inner_doc.data().COURSES[i]+'">'+inner_doc.data().COURSES[i]+'</option>'
-              };
-              str +='</select>';
-              $('#root').append(str);
-        }).catch(function(error){
-            console.log(error);
+        var info_root = document.getElementById("info-root");
+        var examName = document.createElement("TEXTAREA");
+        examName.innerHTML = "Enter Exam Name Here"
+        examName.id = "examName";
+        info_root.appendChild(examName);
+        info_root.appendChild(document.createElement("BR"));
+        var courseSelect = document.createElement("SELECT");
+        courseSelect.id = "course";
+        db.collection("instructors").doc(user.uid).get().then((doc) => {
+          for(var i = 0; i<doc.data().COURSES.length; i++){
+            db.collection("courses").doc(doc.data().COURSES[i]).get().then((inner_doc)=>{
+              courseSelect.append(new Option(inner_doc.data().DEPARTMENT + " - " + inner_doc.data().NUMBER + " --- " + inner_doc.data().SECTION, inner_doc.id));
+            })
+          };
         });
-        str+='Type: <select name="type" id = "type"><option value="announcement">Announcement</option><option value="memo">Memo</option></select>';
-        str+='</br><button class = "reg"  id = "reg" type="reg"> Submit </button> </br>';
-        str+='</form>';
-        $('#root').append(str);
-        $(".reg").on("click",handleMessageSubmit);
+        info_root.appendChild(courseSelect);
+        var root = document.getElementById("button-root");
+        var i = 1;
+        render_question_input(0);
+        var addQuestionButton = document.createElement("BUTTON");
+        addQuestionButton.innerHTML = "Add Question";
+        addQuestionButton.onclick = function(){
+          render_question_input(i++);
+        }
+        root.appendChild(addQuestionButton)
+        var deleteQuestionButton = document.createElement("BUTTON");
+        deleteQuestionButton.innerHTML = "Delete Question";
+        deleteQuestionButton.onclick = function(){
+          var q_root = document.getElementById("question-root");
+          i--;
+          q_root.removeChild(document.getElementById("container"+i));
+        }
+        root.appendChild(deleteQuestionButton);
     } else {
       console.log("Successful Sign Out!");
     }
@@ -74,11 +107,7 @@ const register_user_listener = function(){
 
 export const loadIntoDOM = function() {
     // Grab a jQuery reference to the root HTML element
-    const $root = $('#root');
-    $(".0").on("click",handleMessageSubmit);
     register_user_listener();
-    
-  //  $root.append("<h1>Dynamic Content Here</h1>");
 };
 
 
