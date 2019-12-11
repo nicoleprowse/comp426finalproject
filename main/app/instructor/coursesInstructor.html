@@ -5,7 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
-        <title>Dashboard</title>
+        <title>Courses</title>
 
         <!-- Include links to CSS stylesheets below -->
         <!-- TODO (optional): Add link to bulma here -->
@@ -55,19 +55,28 @@
                     <div class = "column is-2 has-shadow">
                             <aside class="menu">
                                     <p class="menu-label">
-                                        Student
-                                      </p>
+                                        Instructor
+                                    </p>
                                   <ul class="menu-list">
-                                    <li><a class = "is-active" href = "/app/main/dashboard.html">Dashboard</a></li></br>
-                                    <li><a  href="/app/main/courses.html">Courses</a></li></br>
+                                    <li><a href = "/app/instructor/dashboardInstructor.html">Dashboard</a></li></br>
+                                    <li>
+                                        <a  class = "is-active" href="/app/instructor/coursesInstructor.html">Courses</a>
+                                        <ul>
+                                                <li><a class = "" href="/app/instructor/uploadAssignment.html">Assignments</a></li>
+                                                <li><a href="/app/instructor/newmessage.html">Messages</a></li>
+                                                <li><a href="/app/instructor/createExam.html">Exams</a></li>
+                                                <li><a href="/app/instructor/uploadResource.html">Resources</a></li>
+                                        </ul>
+                                    </li></br>
+                                    
                                     <li><a>Calendar</a></li></br>
-                                    <li><a href ="/app/student/viewGrades.html">Grades</a></li></br>
-                                    <li><a href="/app/main/coursesearch.html">Enrollment</a></li></br>
+                                    <li><a>Grades</a></li></br>
+                                    <li><a href="/app/instructor/enrollmentInstructor.html">Enrollment</a></li></br>
                                   </ul>
                                 </aside>
                     </div>
                     <div class = "column is-8 level" style = "background-color: #D3D3D3;">
-                        <!-- <div class="tile is-ancestor is-spaced" id="root"></div> -->
+                        <div class="tile is-ancestor is-spaced" id="root"></div>
                     </div>
                     <div class = "column is-2">
         

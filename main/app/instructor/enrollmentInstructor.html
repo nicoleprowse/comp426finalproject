@@ -53,47 +53,61 @@
                 <div class = "container" style= "height: 740px">
                   <div class = "columns" style= "height: 740px">
                     <div class = "column is-2 has-shadow">
-                        <aside class="menu">
-                            <ul class="menu-list">
-                              <li><a href = "/">Dashboard</a></li></br>
-                              <li>
-                                  <a class = "" href="/app/main/courses.html">Courses</a>
-                                <ul>
-                                    <li><a class = "is-active" href="/app/student/viewAssignments.html">Assignments</a></li>
-                                    <li><a href="/app/student/viewMessages.html">Messages</a></li>
-                                    <li><a href="/app/student/displayExams.html">Exams</a></li>
-                                    <li><a href="/app/student/viewResources.html">Resources</a></li>
-                                </ul>
-                              </li></br>
-                              <li><a>Calendar</a></li></br>
-                              <li><a href ="/app/student/viewGrades.html">Grades</a></li></br>
-                              <li><a href="/app/main/coursesearch.html">Enrollment</a></li></br>
-                            </ul>
-                          </aside>
+                            <aside class="menu">
+                                    <p class="menu-label">
+                                        Instructor
+                                    </p>
+                                    <ul class="menu-list">
+                                            <li><a href = "/app/instructor/dashboardInstructor.html">Dashboard</a></li></br>
+                                            <li>
+                                                <a  href="/app/instructor/coursesInstructor.html">Courses</a>
+                                                <ul>
+                                                        <li><a class = "" href="/app/instructor/uploadAssignment.html">Assignments</a></li>
+                                                        <li><a href="/app/instructor/newmessage.html">Messages</a></li>
+                                                        <li><a href="/app/instructor/createExam.html">Exams</a></li>
+                                                        <li><a href="/app/instructor/uploadResource.html">Resources</a></li>
+                                                </ul>
+                                            </li></br>
+                                            
+                                            <li><a>Calendar</a></li></br>
+                                            <li><a>Grades</a></li></br>
+                                            <li><a class = "is-active" href="/app/instructor/enrollmentInstructor.html">Enrollment</a></li></br>
+                                          </ul>
+                                </aside>
+                                  </aside>
                     </div>
-                    <div class = "column is-8" style = "background-color: #D3D3D3;">
-                        <div class="" id="root"></div>
+                    <div class = "column is-8 level" >
+                            <div class = "container has-text-centered">
+                                    <div class = "column is-12">
+                                            <h1 class="title is-1 has-text-black">Course Search</h1>
+                                            <hr class ="login-hr">
+                                            <p class = "subtitle has-text-black">Enter following information.</p>
+                                            <div class = "box">
+                                                <!-- <figure class ="avatar">
+                                                        <img class="is-rounded" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/University_of_North_Carolina_at_Chapel_Hill_seal.svg/1200px-University_of_North_Carolina_at_Chapel_Hill_seal.svg.png">
+                                                </figure> -->
+                                                <div id="root"></div>
+                                            </div>
+                                    </div>
+                                </div>
                     </div>
                     <div class = "column is-2">
         
                     </div>
                   </div>
                 </div>
-
-
-        <!-- <p class="title is-1">UNC.Web Assignments</p>
+        <!-- <p class="title is-1">UNC.Web Courses</p>
         <figure class="image is-128x128">
                 <img class="is-rounded" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/University_of_North_Carolina_at_Chapel_Hill_seal.svg/1200px-University_of_North_Carolina_at_Chapel_Hill_seal.svg.png">
-        </figure> -->
-        <!-- <div id="userInfo"></div> -->
-        <!-- </br>
+        </figure>
+        <div id="userInfo"></div>
+        </br>
         <div id="root"></div> -->
         <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-storage.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
-        <script src="/scripts/student/viewAssignments.js" type="module"></script>
+        <script src="/scripts/main/coursesearch.js" type="module"></script>
         <script src="/scripts/main/userInfo.js" type="module"></script>
     </body>
 </html>

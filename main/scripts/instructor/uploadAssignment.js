@@ -44,6 +44,7 @@ const register_user_listener = function(){
         examTime.type = 'datetime-local';
         examName.innerHTML = "Enter Assignment Name Here";
         examName.id = "examName";
+        
         info_root.appendChild(examName);
         info_root.appendChild(document.createElement("BR"));
         info_root.appendChild(text);

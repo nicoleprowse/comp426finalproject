@@ -43,8 +43,16 @@ const register_user_listener = function(){
     if (user) {
         var str = '';
         str+='<form class = "form" id = "form1" onsubmit = "save.disabled" = true>';
-        str+='Message: <input type="text" id = "message" value =""></br>';
-        str+='Day and Time: <input type="datetime-local" id = "time"></br>';
+        str+='<div class="field">';
+        str+='<div class="control">';
+        str+='<label class="label">New Message</label>';
+        str+='<input class ="input is-large" type="text" id = "message" value ="" placeholder = "Enter Message"></br>';
+        str+='</div>';
+        str+='</div>';
+        str+='<div class="field">';
+        str+='<div class="control">';
+        str+='<label class="label">Day and Time</label>';
+        str+='<input class = "input is-large" type="datetime-local" id = "time" placeholder = "Date and Time"></br>';
         var k = db.collection("instructors").doc(user.uid).get().then((inner_doc) => {
             var str = 'Course: <select name="course" id = "course">';
               for(var i = 0; i<inner_doc.data().COURSES.length; i++){
@@ -55,8 +63,11 @@ const register_user_listener = function(){
         }).catch(function(error){
             console.log(error);
         });
-        str+='Type: <select name="type" id = "type"><option value="announcement">Announcement</option><option value="memo">Memo</option></select>';
-        str+='</br><button class = "reg"  id = "reg" type="reg"> Submit </button> </br>';
+        str+='<label class="label">Message Type </label>';
+        str+='<div class="select is-dark is-rounded">';
+        str+='<select name="type" id = "type"><option value="announcement">Announcement</option><option value="memo">Memo</option></select>';
+        str+='</div>';
+        str+='</br></br><button class = "reg button is-block is-dark is-medium is-fullwidth"  id = "reg" type="reg"> Submit </button> </br>';
         str+='</form>';
         $('#root').append(str);
         $(".reg").on("click",handleMessageSubmit);
