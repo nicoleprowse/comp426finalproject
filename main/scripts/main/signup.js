@@ -31,13 +31,16 @@ export const signInUser = function(email, password){
 export const renderSignUpField = function(event) {
   var str = '';
   str+='<form class = "form" id = "form1" onsubmit = "save.disabled = true">';
-  str+='New Email: <input type="text" id = "new-email" value =""></br>';
-  str+='New Password: <input type="text" id = "new-password" value =""></br>';
-  str+='New Name: <input type="text" id = "new-name" value =""></br>';
-  str+='New Onyen: <input type="text" id = "new-onyen" value =""></br>';
-  str+='New PID: <input type="text" id = "new-pid" value =""></br>';
+  str+='</br> <p class = "subtitle has-text-black">Enter the following information:</p>';
+  str+='<input class = "input is-medium" type="text" id = "new-email" placeholder = "Email" value =""></br></br>';
+  str+='<input class = "input is-medium" type="text" id = "new-password" placeholder = "Password" value =""></br></br>';
+  str+='<input class = "input is-medium" type="text" id = "new-name" placeholder = "Name" value =""></br></br>';
+  str+='<input class = "input is-medium" type="text" id = "new-onyen" placeholder = "Onyen" value =""></br></br>';
+  str+='<input class = "input is-medium" type="text" id = "new-pid" placeholder = "PID" value =""></br></br>';
+  str+='<div class="select is-info is-rounded">';
   str+='<select name="type" id = "type"><option value="student">Student</option><option value="instructor">Instructor</option></select>';
-  str+='</br><button class = "signup"  id = "0" type="signup"> Sign Up </button> </br>';
+  str+='</div>';
+  str+='</br></br><button class = "signup button is-block is-info is-medium is-fullwidth"  id = "0" type="signup"> Sign Up </button> </br>';
   str+='</form>';
   return str;
 };
@@ -83,24 +86,6 @@ export const handleUserSignout = function(event){
 const register_user_listener = function(){
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {
-          var str = '';
-          str+='<form class = "form" id = "form1" onsubmit = "save.disabled" = true>';
-          str+='Message: <input type="text" id = "message" value =""></br>';
-          str+='Day and Time: <input type="datetime-local" id = "time"></br>';
-          var k = db.collection("instructors").doc(user.uid).get().then((inner_doc) => {
-              var str = 'Course: <select name="course" id = "course">';
-                for(var i = 0; i<inner_doc.data().COURSES.length; i++){
-                  str+='<option value="'+inner_doc.data().COURSES[i]+'">'+inner_doc.data().COURSES[i]+'</option>'
-                };
-                str +='</select>';
-                $('#root').append(str);
-          }).catch(function(error){
-              console.log(error);
-          });
-          str+='Type: <select name="type" id = "type"><option value="announcement">Announcement</option><option value="memo">Memo</option></select>';
-          str+='</br><button class = "submit"  id = "submit" type="submit"> Submit </button> </br>';
-          str+='</form>';
-          $('#root').append(str);
       } else {
         console.log("Successful Sign Out!");
       }

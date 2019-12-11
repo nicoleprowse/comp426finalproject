@@ -5,6 +5,7 @@
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+        <link href="http://maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <title>UNC.Web</title>
 
         <!-- Include links to CSS stylesheets below -->
@@ -12,120 +13,88 @@
     </head>
 
     <body>
-        <p class="title is-1">UNC.Web</p>
-        <figure class="image is-128x128">
-                <img class="is-rounded" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/University_of_North_Carolina_at_Chapel_Hill_seal.svg/1200px-University_of_North_Carolina_at_Chapel_Hill_seal.svg.png">
-        </figure>
-        <div id="userInfo"></div>
-        </br>
-        <div class="tabs is-toggle is-fullwidth">
-                <ul>
-                  <li class="is-active">
-                    <a>
-                      <span class="icon is-small"><i class="fas fa-image" aria-hidden="true"></i></span>
-                      <span>Home</span>
-                    </a>
-                  </li>
-                  <li>
-                        <a>
-                          <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
-                          <span>Course Sites</span>
-                        </a>
-                      </li>
-                  <li>
-                    <a>
-                      <span class="icon is-small"><i class="fas fa-music" aria-hidden="true"></i></span>
-                      <span>Class Search</span>
-                    </a>
-                  </li>
-                  <li>
-                    <a>
-                      <span class="icon is-small"><i class="fas fa-film" aria-hidden="true"></i></span>
-                      <span>My Account</span>
-                    </a>
-                  </li>
-                </ul>
-        </div>
-        <nav class="panel">
-                <p class="panel-heading">
-                  Dashboard
-                </p>
-                <div class="panel-block">
-                  <p class="control has-icons-left">
-                    <span class="icon is-left">
-                      <i class="fas fa-search" aria-hidden="true"></i>
-                    </span>
-                  </p>
+
+        <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+            <div class="navbar-brand">
+              <a class="navbar-item" href="">
+                  <img src="https://www.regupol.us/wp-content/uploads/2017/08/UNC-primary.png" width="150" height="auto">
+                </a>
+            </div>
+          
+            <div id="" class="navbar-menu">
+              <div class="navbar-start"></div>
                 </div>
-                <p class="panel-tabs">
-                  <a class="is-active">Today's Schedule</a>
-                  <a>Assignments</a>
-                  <a>Assessments</a>
-                  <a>Grades</a>
-                </p>
-                <a class="panel-block is-active">
-                  <span class="panel-icon">
-                    <i class="fas fa-book" aria-hidden="true"></i>
-                  </span>
-                  COMP 521    2:00PM - 3:15PM
-                </a>
-                <a class="panel-block">
-                  <span class="panel-icon">
-                    <i class="fas fa-book" aria-hidden="true"></i>
-                  </span>
-                  COMP 426    3:30PM - 4:45PM
-                </a>
-              </nav>
-              <nav class="panel">
-                    <p class="panel-heading">
-                      Announcements
-                    </p>
-                    <div class="panel-block">
-                      <p class="control has-icons-left">
-                        <span class="icon is-left">
-                          <i class="fas fa-search" aria-hidden="true"></i>
+              </div>
+          
+              <div class="navbar-end">
+                  <div class="navbar-item has-dropdown is-hoverable">
+                      <a class="navbar-link">
+                        <span class="icon is-large">
+                            <i class="fa fa-user"></i>
                         </span>
-                      </p>
+                        My HeelHub Account
+                      </a>
+              
+                      <div class="navbar-dropdown">
+                        <a class="navbar-item" href="/app/main/profile.html">
+                          My Profile
+                        </a>
+                        <hr class="navbar-divider">
+                        <a class="navbar-item" id = "mylink"> 
+                          Log Out 
+                        </a>
+                      </div>
                     </div>
-                    <a class="panel-block is-active">
-                      <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                      </span>
-                      Teacher  ---  Subject
-                    </a>
-                    <a class="panel-block">
-                      <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                      </span>
-                      Teacher  ---  Subject
-                    </a>
-                    <a class="panel-block">
-                    <span class="panel-icon">
-                        <i class="fas fa-book" aria-hidden="true"></i>
-                    </span>
-                        Teacher  ---  Subject
-                     </a>
-                  </nav>
-        <a href="/app/main/signin.html">Sign In</a></br>
-        <a href="/app/main/signup.html">Sign Up</a></br>
-        <a href="/app/main/courses.html">Courses</a></br>
-        <a href="/app/main/profile.html">Profile</a></br>
-        <a href="/app/main/coursesearch.html">Course Search</a></br>
-        <h1>Student</h1>
-        <a href="/app/student/displayExams.html">Take an Exam</a></br>
-        <a href="/app/student/viewMessages.html">View Messages</a></br>
-        <a href="/app/student/viewResources.html">View Resources</a></br>
-        <a href="/app/student/viewAssignments.html">View Assignments</a></br>
-        <h1>Instructor</h1>
-        <a href="/app/instructor/newmessage.html">New Message</a></br>
-        <a href="/app/instructor/createExam.html">Create An Exam</a></br>
-        <a href="/app/instructor/uploadAssignment.html">Upload An Assignment</a></br>
-        <a href="/app/instructor/uploadResource.html">Upload A Resource</a></br>
+              </div>
+            </div>
+          </nav>
+
+
+        </br>
+        <div class= "">
+        <div class = "container" style= "height: 580px">
+          <div class = "columns is-flex">
+            <div class = "column is-2 has-shadow">
+                <aside class="menu">
+                    <p class="menu-label">
+                        Student
+                      </p>
+                  <ul class="menu-list">
+                    <li><a href = "/app/main/dashboard.html">Dashboard</a></li></br>
+                    <li><a  href="/app/main/courses.html">Courses</a></li></br>
+                    <li><a>Calendar</a></li></br>
+                    <li><a>Grades</a></li></br>
+                    <li><a href="/app/main/coursesearch.html">Enrollment</a></li></br>
+                  </ul>
+                </aside>
+            </div>
+            <div class = "column is-8">
+
+            </div>
+            <div class = "column is-2">
+
+            </div>
+          </div>
+        </div>
+      </div>
+
         <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
         <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
         <script src="/scripts/main/render.js" type="module"></script>
         <script src="/scripts/main/userInfo.js" type="module"></script>
+        <script type = "text/javascript">
+          var myLink = document.getElementById('mylink')
+
+
+          mylink.onclick = function(event){
+          firebase.auth().signOut().then(function() {
+            window.location.pathname = '/app/main/signin.html'
+          }).catch(function(error) {
+              // An error happened.
+          });
+          }
+        </script>
     </body>
 </html>

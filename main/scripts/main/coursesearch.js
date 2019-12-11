@@ -23,19 +23,44 @@ const register_user_listener = function(){
 
 export const renderCourses = function(event){
     event.preventDefault();
-    $("#root").append(' <p class="panel-heading">Courses</p><div class="panel-block"><p class="control has-icons-left"><span class="icon is-left"><i class="fas fa-search" aria-hidden="true"></i></span></p></div>');
-    db.collection("courses").where("DEPARTMENT", "==", $("#dept").val()).where("NUMBER", ">=", $("#num").val()).get().then(function(querySnapshot) {
-        querySnapshot.forEach(function(doc) {
-            var str = '<a class="panel-block is-active"><span class="panel-icon"><i class="fas fa-book" aria-hidden="true"></i></span>';
-            str+=doc.data().DEPARTMENT+' '+doc.data().NUMBER+' --- '+doc.data().SECTION+'</a>';
-            str+='</br><button class = "add"  id = "'+doc.id+'" type="add"> Add </button> </br>';
-            $(".add").on("click",handleAddButtonPress);
-            $('#root').append(str);
-            console.log(doc.id, " => ", doc.data());
+    if(document.getElementById("courseResultHeading") == null){
+        $("#root").append('<p class="panel-heading" id = "courseResultHeading">Courses</p>');
+        db.collection("courses").where("DEPARTMENT", "==", $("#dept").val()).where("NUMBER", ">=", $("#num").val()).get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                var str = '<div id="CourseSearchClassResults" class = "tile is-parent" style = "background-color: #D3D3D3;"><div class = "tile is-child level-item box is-spaced has-text-centered"><p class="title">';
+                str+= doc.data().DEPARTMENT + ' '+doc.data().NUMBER+' --- '+doc.data().SECTION;
+                str+= '</p></br>';
+                str+='</br><button class = "add"  id = "'+doc.id+'" type="add"> Add </button> </br></div></div>';
+                $(".add").on("click",handleAddButtonPress);
+                $('#root').append(str);
+                console.log(doc.id, " => ", doc.data());
+            });
+        }).catch(function(error) {
+            console.log("Error getting documents: ", error);
+            alert("This combination does not compute. Please, try again!");
         });
-    }).catch(function(error) {
-        console.log("Error getting documents: ", error);
-    });
+        // str = '</div>';
+        // $("#root").append(str);
+    } else{
+        $("#courseResultHeading").replaceWith('<p class="panel-heading" id = "courseResultHeading">Courses</p>');
+        $("div").remove("#CourseSearchClassResults");
+        db.collection("courses").where("DEPARTMENT", "==", $("#dept").val()).where("NUMBER", ">=", $("#num").val()).get().then(function(querySnapshot) {
+            querySnapshot.forEach(function(doc) {
+                var str = '<div id="CourseSearchClassResults" class = "tile is-parent" style = "background-color: #D3D3D3;"><div class = "tile is-child level-item box is-spaced has-text-centered"><p class="title">';
+                str+= doc.data().DEPARTMENT + ' '+doc.data().NUMBER+' --- '+doc.data().SECTION;
+                str+= '</p></br>';
+                str+='</br><button class = "add"  id = "'+doc.id+'" type="add"> Add </button> </br></div></div>';
+                $(".add").on("click",handleAddButtonPress);
+                $('#root').append(str);
+                console.log(doc.id, " => ", doc.data());
+            });
+        }).catch(function(error) {
+            console.log("Error getting documents: ", error);
+            alert("This combination does not compute. Please, try again!");
+        });
+        // $("#root").append('</div>');
+    }
+
 }
 
 export const handleAddButtonPress = function(event){
@@ -51,9 +76,11 @@ export const handleAddButtonPress = function(event){
         COURSES: classes
     }).then(function() {
         console.log("Document successfully updated!");
+        // alert("Class was successfully added!");
     }).catch(function(error) {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
+        alert("Class could NOT be added!");
     }))
 });
 };
@@ -82,9 +109,19 @@ export const renderCurrentUserCourses = function(user){
 export const renderSearchField = function() {
     var str = '';
     str+='<form class = "form" id = "form1" onsubmit = "save.disabled" = true>';
-    str+='Department: <input type="text" id = "dept" value =""></br>';
-    str+='Greater Than: <input type="number" id = "num" value =""></br>';
-    str+='</br><button class = "reg"  id = "reg" type="reg"> Submit </button> </br>';
+    str+='<div class="field">';
+    str+='<div class="control">';
+    str+='<input class ="input is-large" type="text" id = "dept" placeholder="Department" value =""></br>';
+    str+='</div>';
+    str+='</div>';
+    str+='<div class="field">';
+    str+='<div class="control">';
+    str+='<input class ="input is-large" type="number" id = "num" placeholder="Course Number Greater Than" value =""></br>';
+    str+='</div>';
+    str+='</div><br>';
+    str+='<div>';
+    str+='</br><button class = "reg button is-block is-dark is-medium is-fullwidth"  id = "reg" type="reg"> Submit </button> </br>';
+    str+='</div>';
     str+='</form>';
     $('#root').append(str);
     $(".reg").on("click",renderCourses);

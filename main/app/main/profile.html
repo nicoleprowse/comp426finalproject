@@ -12,13 +12,73 @@
     </head>
 
     <body>
-        <p class="title is-1">UNC.Web Profile</p>
-        <figure class="image is-128x128">
-                <img class="is-rounded" src="https://upload.wikimedia.org/wikipedia/en/thumb/5/5c/University_of_North_Carolina_at_Chapel_Hill_seal.svg/1200px-University_of_North_Carolina_at_Chapel_Hill_seal.svg.png">
-        </figure>
-        <div id="userInfo"></div>
+        
+            <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+                    <div class="navbar-brand">
+                      <a class="navbar-item" href="">
+                          <img src="https://www.regupol.us/wp-content/uploads/2017/08/UNC-primary.png" width="150" height="auto">
+                        </a>
+                    </div>
+                  
+                    <div id="" class="navbar-menu">
+                      <div class="navbar-start"></div>
+                        </div>
+                      </div>
+                  
+                      <div class="navbar-end">
+                          <div class="navbar-item has-dropdown is-hoverable">
+                              <a class="navbar-link">
+                                <span class="icon is-large">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                                My HeelHub Account
+                              </a>
+                      
+                              <div class="navbar-dropdown">
+                                <a class="navbar-item" href="/app/main/profile.html">
+                                  My Profile
+                                </a>
+                                <hr class="navbar-divider">
+                                <a class="navbar-item" href = ""> 
+                                  Log Out
+                                </a>
+                              </div>
+                            </div>
+                      </div>
+                    </div>
+                  </nav>
+        
+                </br>
+                <div class = "container">
+                  <div class = "columns">
+                    <div class = "column is-2 has-shadow">
+                        <aside class="menu">
+                            <p class="menu-label">
+                                Student
+                              </p>
+                          <ul class="menu-list">
+                            <li><a href = "/app/main/dashboard.html">Dashboard</a></li></br>
+                            <li><a  href="/app/main/courses.html">Courses</a></li></br>
+                            <li><a>Calendar</a></li></br>
+                            <li><a>Grades</a></li></br>
+                            <li><a href="/app/main/coursesearch.html">Enrollment</a></li></br>
+                          </ul>
+                        </aside>
+                    </div>
+                    <div class = "column is-8">
+                        <h1 class="has-text-black is-size-1">My Profile</h1>
+                            <div id="root"></div>
+                    </div>
+                    <div class = "column is-2">
+        
+                    </div>
+                  </div>
+                </div>
+        
+        
+        <!-- <div id="userInfo"></div>
         </br>
-        <div id="root"></div>
+        <div id="root"></div> -->
         <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
         <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
         <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>

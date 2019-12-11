@@ -34,8 +34,8 @@ export const renderCurrentUserAssignments = function(user){
         var root = document.getElementById("root");
         var panel_heading = document.createElement("P")
         panel_heading.className = "panel-heading";
-        panel_heading.innerHTML = "Messages";
-        root.appendChild(panel_heading);
+        panel_heading.innerHTML = "Assignments";
+        $("#root").append(panel_heading);
             for(var i = 0;i<courses.length;i++){
                 db.collection("courses").doc(courses[i]).get().then(function(doc) {
                     var a = document.createElement("A");

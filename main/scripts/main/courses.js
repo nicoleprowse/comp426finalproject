@@ -29,20 +29,30 @@ export const renderCurrentUserCourses = function(user){
         return "error";
        });
        return courses_promise.then((courses) => {
-        var str = ' <p class="panel-heading">My Courses</p><div class="panel-block"><p class="control has-icons-left"><span class="icon is-left"><i class="fas fa-search" aria-hidden="true"></i></span></p></div>';
+        // var str = ' <p class="panel-heading">My Courses</p><div class="panel-block"><p class="control has-icons-left"><span class="icon is-left"><i class="fas fa-search" aria-hidden="true"></i></span></p></div>';
+            var str = '';//'<div class = "tile is-ancestor">';
+            
             for(var i = 0;i<courses.length;i++){
               console.log(courses[i])
                 courses_promise = db.collection("courses").doc(courses[i]).get().then((inner_doc) => {
-                    str = '<a class="panel-block is-active"><span class="panel-icon"><i class="fas fa-book" aria-hidden="true"></i></span>';
-                    str+=inner_doc.data().DEPARTMENT + ' '+inner_doc.data().NUMBER+' --- '+inner_doc.data().SECTION+'</a>';
+                    str = '<div class = "tile is-parent" style = "background-color: #D3D3D3; flex-wrap: wrap;"><a href = "/"><div class = "tile is-child level-item box is-spaced has-text-centered"><p class="title">';
+                    str+=inner_doc.data().DEPARTMENT + ' '+inner_doc.data().NUMBER+' --- '+inner_doc.data().SECTION;
+                    str+= '</p></br></br></br></br></br></br></div></a></div>';
+                    // console.log(str);
                     $('#root').append(str);
                  })
+                  
             }
-            $('#root').append(str+'</nav>');    
+            //str += '</div>';
+            //$('#root').append(str + '</nav>');    
        })
     });
 }
 
+// str = '<a class="panel-block is-active"><span class="panel-icon"><i class="fas fa-book" aria-hidden="true"></i></span>';
+// str+=inner_doc.data().DEPARTMENT + ' '+inner_doc.data().NUMBER+' --- '+inner_doc.data().SECTION;
+// str+= '</a>'
+// $('#root').append(str);
 
 
 /**

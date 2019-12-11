@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+        <title>Courses2</title>
+
+        <!-- Include links to CSS stylesheets below -->
+        <!-- TODO (optional): Add link to bulma here -->
+    </head>
+
+    <body>
+        
+            <nav class="navbar is-info" role="navigation" aria-label="main navigation">
+                    <div class="navbar-brand">
+                      <a class="navbar-item" href="">
+                          <img src="https://www.regupol.us/wp-content/uploads/2017/08/UNC-primary.png" width="150" height="auto">
+                        </a>
+                    </div>
+                  
+                    <div id="" class="navbar-menu">
+                      <div class="navbar-start"></div>
+                        </div>
+                      </div>
+                  
+                      <div class="navbar-end">
+                          <div class="navbar-item has-dropdown is-hoverable">
+                              <a class="navbar-link">
+                                <span class="icon is-large">
+                                    <i class="fa fa-user"></i>
+                                </span>
+                                My HeelHub Account
+                              </a>
+                      
+                              <div class="navbar-dropdown">
+                                <a class="navbar-item" href="/app/main/profile.html">
+                                  My Profile
+                                </a>
+                                <hr class="navbar-divider">
+                                <a class="navbar-item" id = "mylink"> 
+                                  Log Out
+                                </a>
+                              </div>
+                            </div>
+                      </div>
+                    </div>
+                  </nav>
+        
+        
+                </br>
+                <div class = "container" style= "height: 740px">
+                  <div class = "columns" style= "height: 740px">
+                    <div class = "column is-2 has-shadow">
+                        <aside class="menu">
+                            <ul class="menu-list">
+                              <li><a href = "/">Dashboard</a></li></br>
+                              <li>
+                                  <a class = "is-active" href="/app/main/courses.html">Courses</a>
+                                  <ul>
+                                        <li><a class = "" href="/app/student/viewAssignments.html">Assignments</a></li>
+                                        <li><a href="/app/student/viewMessages.html">Messages</a></li>
+                                        <li><a href="/app/student/displayExams.html">Exams</a></li>
+                                        <li><a href="/app/student/viewResources.html">Resources</a></li>
+                                    </ul>
+                              </li></br>
+                              <li><a>Calendar</a></li></br>
+                              <li><a>Grades</a></li></br>
+                              <li><a href="/app/main/coursesearch.html">Enrollment</a></li></br>
+                            </ul>
+                          </aside>
+                    </div>
+                    <div class = "column is-8 level" style = "background-color: #D3D3D3;">
+                        <div class="tile is-ancestor is-spaced" id="root"></div>
+                    </div>
+                    <div class = "column is-2">
+        
+                    </div>
+                  </div>
+                </div>
+        
+        
+        <!-- <div id="userInfo"></div> -->
+        
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-app.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/7.2.3/firebase-firestore.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/6.1.1/firebase-auth.js"></script>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js"></script>
+        <script src="/scripts/main/courses.js" type="module"></script>
+        <script src="/scripts/main/userInfo.js" type="module"></script>
+        <script type = "text/javascript">
+          var myLink = document.getElementById('mylink')
+
+
+          mylink.onclick = function(event){
+          firebase.auth().signOut().then(function() {
+            window.location.pathname = '/app/main/signin.html'
+          }).catch(function(error) {
+              // An error happened.
+          });
+          }
+        </script>
+
+    </body>
+</html>
