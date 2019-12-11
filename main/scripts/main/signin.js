@@ -89,15 +89,13 @@ export const handleUserSignout = function(event){
 const register_user_listener = function(){
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
-      console.log("Successful Sign In: "+user.email);
-      console.log("With an uid of: "+user.uid);
-      db.collection('users').doc(user.uid).get().then((doc) =>{
-        if(doc.data().TYPE=='students'){
-          window.location.pathname = '/';
+      db.collection('users').doc(user.uid).get().then((doc=>{
+        if(doc.data().type=='students'){
+          window.location.pathname = '/'
         }else{
-          window.location.pathname = '/app/instructor/instructorView.html';
+          window.location.pathname = '/app/instructor/instructorView.html'
         }
-      })
+      }))
     } else {
       console.log("Successful Sign Out!");
     }

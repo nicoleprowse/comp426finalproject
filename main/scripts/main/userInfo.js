@@ -28,6 +28,16 @@ export const renderCurrentUserInfo = function(user){
     console.log("Hello World")
     const $userinfo = $('#userinfo');
     register_user_listener();
+    var myLink = document.getElementById('mylink')
+
+
+          mylink.onclick = function(event){
+          firebase.auth().signOut().then(function() {
+            window.location.pathname = '/app/main/signin.html'
+          }).catch(function(error) {
+              // An error happened.
+          });
+          }
   //  $root.append("<h1>Dynamic Content Here</h1>");
 };
 
