@@ -91,7 +91,13 @@ const register_user_listener = function(){
     if (user) {
       console.log("Successful Sign In: "+user.email);
       console.log("With an uid of: "+user.uid);
-      window.location.pathname = '/'
+      db.collection('users').doc(user.uid).get().then((doc) =>{
+        if(doc.data().TYPE=='students'){
+          window.location.pathname = '/';
+        }else{
+          window.location.pathname = '/app/instructor/instructorView.html';
+        }
+      })
     } else {
       console.log("Successful Sign Out!");
     }
