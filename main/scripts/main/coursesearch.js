@@ -76,11 +76,11 @@ export const handleAddButtonPress = function(event){
         COURSES: classes
     }).then(function() {
         console.log("Document successfully updated!");
-        // alert("Class was successfully added!");
+        window.location.pathname = '/app/main/courses.html';
     }).catch(function(error) {
         // The document probably doesn't exist.
         console.error("Error updating document: ", error);
-        alert("Class could NOT be added!");
+        //alert("Class could NOT be added!");
     }))
 });
 };
