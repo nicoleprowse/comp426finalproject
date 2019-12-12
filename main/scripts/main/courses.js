@@ -35,7 +35,7 @@ export const renderCurrentUserCourses = function(user){
             for(var i = 0;i<courses.length;i++){
               console.log(courses[i])
                 courses_promise = db.collection("courses").doc(courses[i]).get().then((inner_doc) => {
-                    str = '<div class = "tile is-parent" style = "background-color: #D3D3D3; flex-wrap: wrap;"><a href = "/"><div class = "tile is-child level-item box is-spaced has-text-centered"><p class="title">';
+                    str = '<div class = "tile is-parent" style = "background-color: #D3D3D3; flex-wrap: wrap;"><a href = "/app/student/courses2.html"><div class = "tile is-child level-item box is-spaced has-text-centered"><p class="title">';
                     str+=inner_doc.data().DEPARTMENT + ' '+inner_doc.data().NUMBER+' --- '+inner_doc.data().SECTION;
                     str+= '</p></br></br></br></br></br></br></div></a></div>';
                     // console.log(str);

@@ -45,7 +45,7 @@ export const renderCurrentUserMessages = function(user){
                     querySnapshot.forEach(function(doc) {
                         var a = document.createElement("A");
                         a.className = "panel-block is-active";
-                        a.innerHTML = doc.data().TEXT + " " + doc.data().DATETIME.toDate();
+                        a.innerHTML = doc.data().TEXT + " " + doc.data().DATETIME.toDate().toLocaleString();
                         console.log(doc.data().DATETIME.toDate())
                         root.appendChild(a);
                     });
