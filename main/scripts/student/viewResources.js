@@ -34,7 +34,7 @@ export const renderCurrentUserMessages = function(user){
         var root = document.getElementById("root");
         var panel_heading = document.createElement("P")
         panel_heading.className = "panel-heading";
-        panel_heading.innerHTML = "Messages";
+        panel_heading.innerHTML = "Resources";
         root.appendChild(panel_heading);
             for(var i = 0;i<courses.length;i++){
                 db.collection("courses").doc(courses[i]).get().then(function(doc) {
@@ -58,6 +58,7 @@ export const renderCurrentUserMessages = function(user){
                             //TODO Fix downloads
                             button.onclick = function(){
                                 storage.child(doc.id+'/'+button.id).getDownloadURL().then(function(url) {
+                                    url = "https://firebasestorage.googleapis.com/v0/b/comp426-final.appspot.com/o/Course0%2FCOMP426%20Final%20Project%20Proposal.pdf?alt=media&token=2aa4b51e-ad68-43eb-9b9f-62ed817d304a"
                                     window.open(url, '_blank');
                                    console.log(url);
                                   }).catch(function(error) {

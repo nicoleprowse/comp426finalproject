@@ -32,9 +32,12 @@ export const renderMCQuestionEntry = function() {
 const register_user_listener = function(){
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
+      $("#root").empty();
+      
       console.log("Successful Sign In: "+user.email);
       console.log("With an uid of: "+user.uid);
     } else {
+      $("#root").empty();
       console.log("Successful Sign Out!");
     }
   });
@@ -81,9 +84,6 @@ function displayUserData(user) {
  */
 export const loadIntoDOM = function() {
     // Grab a jQuery reference to the root HTML element
-    const $root = $('#root');
-    $root.append(renderMCQuestionEntry());
-    $(".submit").on("click",handleMCQuestionSubmit);
     register_user_listener();
   //  $root.append("<h1>Dynamic Content Here</h1>");
 };

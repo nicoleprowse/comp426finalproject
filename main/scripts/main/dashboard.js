@@ -29,26 +29,22 @@ export const renderCurrentUserMessages = function(user){
         return "error";
        });
        return courses_promise.then((courses) => {
+        $("#root").empty()
         var root = document.getElementById("root");
         var panel_heading = document.createElement("P")
         panel_heading.className = "panel-heading";
-        panel_heading.innerHTML = "Messages";
+        panel_heading.innerHTML = "Dashboard";
         root.appendChild(panel_heading);
             for(var i = 0;i<courses.length;i++){
                 db.collection("courses").doc(courses[i]).get().then(function(doc) {
-                    var a = document.createElement("A");
+                        var a = document.createElement("A");
                         a.className = "panel-block is-active title is-4";
                         a.innerHTML = doc.data().DEPARTMENT + " " + doc.data().NUMBER + " --- " + doc.data().SECTION;
                         root.appendChild(a);
-                });
-                db.collection("messages").where("COURSE_ID","==",courses[i]).get().then(function(querySnapshot) {
-                    querySnapshot.forEach(function(doc) {
-                        var a = document.createElement("A");
-                        a.className = "panel-block is-active";
-                        a.innerHTML = doc.data().TEXT + " " + doc.data().DATETIME;
-                        console.log(doc.data().DATETIME)
-                        root.appendChild(a);
-                    });
+                        var b = document.createElement("A");
+                        b.className = "panel-block is-active title is-4";
+                        b.innerHTML = "Days Meeting: "+doc.data().DAYS + " Credit Hours: " + doc.data().HOURS;
+                        root.appendChild(b);
                 });
             }  
        })

@@ -28,7 +28,7 @@ export const handleMessageSubmit = function(event){
     COURSE_ID: $("#course").val(),
     TEXT: $("#message").val(),
     TYPE: $("#type").val(),
-    DATE: $("#time").val()
+    DATETIME: new Date(Date.parse($("#time").val())).toLocaleString()
 })
 .then(function() {
     console.log("Document successfully written!");
