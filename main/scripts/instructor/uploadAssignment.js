@@ -16,17 +16,6 @@ const submit_new_exam = function(number_questions){
 }
 
 
-const render_question_input = function(index){
-  var root = document.getElementById("question-root");
-  var container = document.createElement("DIV");
-  container.id = "container"+index;
-  var question = document.createElement("TEXTAREA");
-  question.innerHTML = "Enter Question "+ index + " here"
-  question.id = "q"+index;
-  container.appendChild(question);
-  container.appendChild(document.createElement("BR"));
-  root.appendChild(container);
-}
 
 
 const register_user_listener = function(){
@@ -34,7 +23,9 @@ const register_user_listener = function(){
     if (user) {
         var info_root = document.getElementById("info-root");
         var examName = document.createElement("TEXTAREA");
+        examName.className = "input is-large"
         var text  = document.createElement("TEXTAREA");
+        text.className = "input is-large"
         text.innerHTML = "Enter Assignment Details Here";
         var examTime = document.createElement("INPUT");
         var file = document.createElement("INPUT");
@@ -44,15 +35,34 @@ const register_user_listener = function(){
         examTime.type = 'datetime-local';
         examName.innerHTML = "Enter Assignment Name Here";
         examName.id = "examName";
-        
+        var name_label = document.createElement("LABEL");
+        name_label.className = "label";
+        name_label.innerHTML = "Assignment Name"
+        info_root.appendChild(name_label)
         info_root.appendChild(examName);
         info_root.appendChild(document.createElement("BR"));
+        var text_label = document.createElement("LABEL");
+        text_label.className = "label";
+        text_label.innerHTML = "Assignment Details"
+        info_root.appendChild(text_label)
         info_root.appendChild(text);
         info_root.appendChild(document.createElement("BR"));
+        var file_label = document.createElement("LABEL");
+        file_label.className = "label";
+        file_label.innerHTML = "File"
+        info_root.appendChild(file_label)
         info_root.appendChild(file);
         info_root.appendChild(document.createElement("BR"));
+        var time_label = document.createElement("LABEL");
+        time_label.className = "label";
+        time_label.innerHTML = "Assignment Time"
+        info_root.appendChild(time_label)
         info_root.appendChild(examTime);
         info_root.appendChild(document.createElement("BR"));
+        var course_label = document.createElement("LABEL");
+        course_label.className = "label";
+        course_label.innerHTML = "Course"
+        info_root.appendChild(course_label)
         var courseSelect = document.createElement("SELECT");
         courseSelect.id = "course";
         db.collection("instructors").doc(user.uid).get().then((doc) => {
@@ -62,9 +72,14 @@ const register_user_listener = function(){
             })
           };
         });
-        info_root.appendChild(courseSelect);
+        var course_div = document.createElement("DIV");
+        course_div.className = "select is-dark is-rounded"
+        course_div.appendChild(courseSelect)
+        info_root.appendChild(course_div);
         var button = document.createElement("BUTTON");
         button.innerHTML = "Upload Assignment";
+        button.className = "button is-round is-info is-medium"
+        info_root.appendChild(document.createElement("BR"));
         info_root.appendChild(document.createElement("BR"));
         info_root.appendChild(button);
         button.onclick = function(){

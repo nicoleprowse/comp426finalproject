@@ -27,13 +27,16 @@ export const handleMessageSubmit = function(event){
   db.collection("messages").doc("Message"+tail).set({
     COURSE_ID: $("#course").val(),
     TEXT: $("#message").val(),
-    TYPE: $("#type").val()
+    TYPE: $("#type").val(),
+    DATE: $("#time").val()
 })
 .then(function() {
     console.log("Document successfully written!");
+    document.location.pathname = '/app/instructor/instructorView.html'
 })
 .catch(function(error) {
     console.error("Error writing document: ", error);
+    alert("Error Submitting Message");
 });
 };
 
@@ -50,19 +53,13 @@ const register_user_listener = function(){
         str+='</div>';
         str+='</div>';
         str+='<div class="field">';
-        str+='<div class="control">';
+        str+='<div class="control" id = "last-div">';
         str+='<label class="label">Day and Time</label>';
         str+='<input class = "input is-large" type="datetime-local" id = "time" placeholder = "Date and Time"></br>';
-        var k = db.collection("instructors").doc(user.uid).get().then((inner_doc) => {
-            var str = 'Course: <select name="course" id = "course">';
-              for(var i = 0; i<inner_doc.data().COURSES.length; i++){
-                str+='<option value="'+inner_doc.data().COURSES[i]+'">'+inner_doc.data().COURSES[i]+'</option>'
-              };
-              str +='</select>';
-              $('#root').append(str);
-        }).catch(function(error){
-            console.log(error);
-        });
+        str+='<label class="label">Course </label>';
+        str+='<div class="select is-dark is-rounded">';
+        str+='<select name="type" id = "course"></select>';
+        str+='</div>';
         str+='<label class="label">Message Type </label>';
         str+='<div class="select is-dark is-rounded">';
         str+='<select name="type" id = "type"><option value="announcement">Announcement</option><option value="memo">Memo</option></select>';
@@ -70,6 +67,14 @@ const register_user_listener = function(){
         str+='</br></br><button class = "reg button is-block is-dark is-medium is-fullwidth"  id = "reg" type="reg"> Submit </button> </br>';
         str+='</form>';
         $('#root').append(str);
+        var course_select = document.getElementById("course")
+        var k = db.collection("instructors").doc(user.uid).get().then((inner_doc) => {
+          for(var i = 0; i<inner_doc.data().COURSES.length; i++){
+            course_select.appendChild(new Option(inner_doc.data().COURSES[i],inner_doc.data().COURSES[i]))
+          };
+          }).catch(function(error){
+        console.log(error);
+        });
         $(".reg").on("click",handleMessageSubmit);
     } else {
       console.log("Successful Sign Out!");

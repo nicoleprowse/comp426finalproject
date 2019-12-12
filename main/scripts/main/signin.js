@@ -90,9 +90,10 @@ const register_user_listener = function(){
   firebase.auth().onAuthStateChanged(function(user) {
     if (user) {
       db.collection('users').doc(user.uid).get().then((doc=>{
-        if(doc.data().type=='students'){
+        if(doc.data().TYPE=='students'){
           window.location.pathname = '/'
         }else{
+          console.log(doc.data().TYPE)
           window.location.pathname = '/app/instructor/instructorView.html'
         }
       }))

@@ -17,7 +17,13 @@ const submit_new_exam = function(number_questions){
 const render_question_input = function(index){
   var root = document.getElementById("question-root");
   var container = document.createElement("DIV");
+  if(index>0)container.appendChild(document.createElement("BR"))
+  if(index>0)container.appendChild(document.createElement("BR"))
   container.id = "container"+index;
+  var question_label = document.createElement("LABEL");
+  question_label.className = "label";
+  question_label.innerHTML = "Question " + index
+  container.appendChild(question_label)
   var question = document.createElement("TEXTAREA");
   question.innerHTML = "Enter Question "+ index + " here"
   question.id = "q"+index;
@@ -33,13 +39,15 @@ const render_question_input = function(index){
       try{
         var div = document.getElementById("answers"+index);
         container.removeChild(div);
-        var k = document.getElementById("correct"+index);
+        var k = document.getElementById("cor"+index);
         container.removeChild(k);
         }catch(e){
           console.log(e);
         }
       var div = document.createElement("DIV");
       div.id = "answers"+index;
+      div.appendChild(document.createElement("BR"))
+      div.appendChild(document.createElement("BR"))
       var a = document.createElement("TEXTAREA")
       a.innerHTML = "Enter Answer Choice A Here";
       a.id = "a"+index;
@@ -62,45 +70,63 @@ const render_question_input = function(index){
       container.appendChild(div);
       var cont = document.createElement("DIV");
       cont.id = 'cor'+index;
+      cont.className = "select is-dark is-rounded"
       var correct = document.createElement("SELECT");
       correct.id = "correct"+index;
       correct.append(new Option("A", "a"));
       correct.append(new Option("B", "b"));
       correct.append(new Option("C", "c"));
       correct.append(new Option("D", "d"));
-      cont.append('Correct: ');
+      var correct_label = document.createElement("LABEL")
+      correct_label.className ="label"
+      correct_label.innerHTML = "Correct:"
+      cont.appendChild(correct_label);
       cont.appendChild(correct);
       container.appendChild(cont);
     }else if(e.target.value=='tf'){
       try{
       var div = document.getElementById("answers"+index);
       container.removeChild(div);
-      var k = document.getElementById("correct"+index);
-      container.removeChild(k);
+      var k = document.getElementById("cor"+index);
+      container.removeChild(cont);
       }catch(e){
         console.log(e);
       }
+      container.appendChild(document.createElement("BR"))
+      container.appendChild(document.createElement("BR"))
+      container.appendChild(document.createElement("BR"))
       var cont = document.createElement("DIV");
       cont.id = 'cor'+index;
+      cont.className = "select is-dark is-rounded"
       var correct = document.createElement("SELECT");
       correct.id = "correct"+index;
       correct.append(new Option("T", "t"));
       correct.append(new Option("F", "f"));
-      cont.append('Correct: ');
+      var correct_label = document.createElement("LABEL")
+      correct_label.className ="label"
+      correct_label.innerHTML = "Correct:"
+      cont.appendChild(correct_label);
       cont.appendChild(correct);
       container.appendChild(cont);
     }else{
       try{
         var div = document.getElementById("answers"+index);
         container.removeChild(div);
-        var k = document.getElementById("correct"+index);
+        var k = document.getElementById("cor"+index);
         container.removeChild(k);
         }catch(e){
           console.log(e);
         }
     }
   };
-  container.appendChild(type);
+  var type_div = document.createElement("DIV");
+  type_div.className = "select is-dark is-rounded"
+  var type_label = document.createElement("DIV")
+  type_label.className = "label"
+  type_label.innerHTML = "Question Type"
+  type_div.appendChild(type_label)
+  type_div.appendChild(type)
+  container.appendChild(type_div);
   root.appendChild(container);
 }
 
@@ -114,10 +140,21 @@ const register_user_listener = function(){
         examTime.type = 'datetime-local';
         examName.innerHTML = "Enter Exam Name Here";
         examName.id = "examName";
+        var exam_label = document.createElement("LABEL");
+        exam_label.className = "label";
+        exam_label.innerHTML = "Exam Name"
+        info_root.appendChild(exam_label)
         info_root.appendChild(examName);
         info_root.appendChild(document.createElement("BR"));
+        var time_label = document.createElement("LABEL");
+        time_label.className = "label";
+        time_label.innerHTML = "Exam Time"
+        info_root.appendChild(time_label);
         info_root.appendChild(examTime);
-        info_root.appendChild(document.createElement("BR"));
+        var course_label = document.createElement("LABEL");
+        course_label.className = "label";
+        course_label.innerHTML = "Course"
+        info_root.appendChild(course_label)
         var courseSelect = document.createElement("SELECT");
         courseSelect.id = "course";
         db.collection("instructors").doc(user.uid).get().then((doc) => {
@@ -127,7 +164,10 @@ const register_user_listener = function(){
             })
           };
         });
-        info_root.appendChild(courseSelect);
+        var course_div = document.createElement("DIV");
+        course_div.className = "select is-dark is-rounded"
+        course_div.appendChild(courseSelect)
+        info_root.appendChild(course_div);
         var root = document.getElementById("button-root");
         var i = 1;
         render_question_input(0);
@@ -177,6 +217,8 @@ const register_user_listener = function(){
         addQuestionButton.onclick = function(){
           render_question_input(i++);
         }
+        root.appendChild(document.createElement("BR"))
+        root.appendChild(document.createElement("BR"))
         root.appendChild(addQuestionButton)
         var deleteQuestionButton = document.createElement("BUTTON");
         deleteQuestionButton.innerHTML = "Delete Question";

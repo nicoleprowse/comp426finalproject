@@ -34,14 +34,23 @@ const register_user_listener = function(){
     if (user) {
         var info_root = document.getElementById("info-root");
         var examName = document.createElement("TEXTAREA");
+        examName.className = "input is-large"
         var file = document.createElement("INPUT");
         file.type = "file";
         file.innerHTML = "Select a File";
         file.id = 'file-input';
         examName.innerHTML = "Enter Resource Name Here";
         examName.id = "resourceName";
+        var name_label = document.createElement("LABEL");
+        name_label.className = "label";
+        name_label.innerHTML = "Resource Name"
+        info_root.appendChild(name_label)
         info_root.appendChild(examName);
         info_root.appendChild(document.createElement("BR"));
+        var file_label = document.createElement("LABEL");
+        file_label.className = "label";
+        file_label.innerHTML = "File"
+        info_root.appendChild(file_label)
         info_root.appendChild(file);
         info_root.appendChild(document.createElement("BR"));
         var courseSelect = document.createElement("SELECT");
@@ -53,9 +62,17 @@ const register_user_listener = function(){
             })
           };
         });
-        info_root.appendChild(courseSelect);
+        var course_label = document.createElement("LABEL");
+        course_label.className = "label";
+        course_label.innerHTML = "Course"
+        info_root.appendChild(course_label)
+        var course_div = document.createElement("DIV");
+        course_div.className = "select is-dark is-rounded"
+        course_div.appendChild(courseSelect)
+        info_root.appendChild(course_div);
         var button = document.createElement("BUTTON");
         button.innerHTML = "Upload Resource";
+        button.className = "button is-round is-info is-medium"
         info_root.appendChild(document.createElement("BR"));
         info_root.appendChild(button);
         button.onclick = function(){
