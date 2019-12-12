@@ -42,6 +42,25 @@ export const renderCurrentUserMessages = function(user){
                             root.appendChild(b);
                         });
                     })
+                    db.collection("assessments").where("COURSE","==",courses[i]).get().then((query)=>{
+                      query.forEach(element => {
+                          var a = document.createElement("A");
+                          a.className = "panel-block is-active";
+                          a.innerHTML = element.data().NAME;
+                          root.appendChild(a);
+                          var b = document.createElement("A");
+                          b.className = "panel-block is-active";
+                          root.appendChild(b);
+                          try{
+                            var date = element.data().DATE.toDate();
+                            b.innerHTML = date.toLocaleString();
+                          }catch(e){
+                            var date = new Date(Date.parse(element.data().DATE))
+                            b.innerHTML = date.toLocaleString();
+                          }
+
+                      });
+                  })
             }  
        })
     });
